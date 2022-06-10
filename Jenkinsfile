@@ -15,13 +15,13 @@ pipeline {
 
 	tools {
 		jdk "Java-1.8"
-		maven "Maven-3.5.3"
+		maven "Maven-3.5.8"
 	}
 
     stages {
         stage('Clone sources'){
             steps {
-                git url: 'https://github.com/Anusha-DevOp/web_ex'
+                git url: 'https://github.com/220516-Java-Angular-Enterprise/jenkins-demo'
             }
         }
 
@@ -34,22 +34,11 @@ pipeline {
 	      }
 	}
 
-//	stage('Quality Gate') {
-//		steps {
-//			timeout(time: 1, unit: 'HOURS') {
-			//Parameter indicates wether to set pipeline to UNSTABLE if Quality Gate fails
-		        // true = set pipeline to UNSTABLE, false = don't
-			// Requires SonarQube Scanner for Jenkins 2.7+
-//			waitForQualityGate abortPipeline: false
-//		       }
-//		 }
-//	}
-
 	stage('Artifactory configuration') {
 
 	   steps {
 		script {
-			rtMaven.tool = 'Maven-3.5.3' //Maven tool name specified in Jenkins configuration
+			rtMaven.tool = 'Maven-3.5.8' //Maven tool name specified in Jenkins configuration
 
 			rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server //Defining where the build artifacts should be deployed to
 
